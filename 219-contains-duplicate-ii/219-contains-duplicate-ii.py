@@ -19,5 +19,8 @@ class Solution:
                                     if abs(l1[i][j] - l1[i][m]) <= k :
                                         ok = True
                                         break  
-
-                return ok       
+                            else :
+                                break 
+                    else :
+                        break                
+                return ok    
