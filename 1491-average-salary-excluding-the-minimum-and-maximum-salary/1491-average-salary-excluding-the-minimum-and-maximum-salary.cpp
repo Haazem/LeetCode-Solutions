@@ -1,7 +1,7 @@
 class Solution {
 public:
     double average(vector<int>& salary) {
-        int mn = 1000009;
+        	int mn = 1000009;
 	int mx = -1;
 	int n = salary.size();
 	double sm = 0 ;
@@ -12,8 +12,8 @@ public:
 		 sm += salary[i];
 	}
 
-	cout << std::fixed;
-	cout << std::setprecision(5);
+	//cout << std::fixed;
+	//cout << std::setprecision(5);
 	return (sm - (mn + mx)) / (n - 2);
     }
 };
