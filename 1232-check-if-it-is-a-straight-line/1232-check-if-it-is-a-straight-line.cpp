@@ -1,31 +1,31 @@
 class Solution {
 public:
     bool checkStraightLine(vector<vector<int>>& coordinates) {
-        	set<int> s1 ;
+        
 	int n = coordinates.size();
+
+	//first_point
+	int x1 = coordinates[0][0];
+	int y1 = coordinates[0][1];
+
+	//second point
+	int x2 = coordinates[1][0];
+	int y2 = coordinates[1][1];
+
+	int dx = x2 - x1 ;
+	int dy = y2 - y1 ;
+
 	for (int i = 0 ; i < n ; i ++ )
 	{
-		int x1 = coordinates[i][0];
-		int y1 = coordinates[i][1];
+		int x = coordinates[i][0];
+		int y = coordinates[i][1];
 
-		for (int j = 0 ; j < n ; j ++  )
-		{
-			if (i != j )
-			{
-				int x2 = coordinates[j][0];
-				int y2 = coordinates[j][1];
-				int k1 = (y2 - y1);
-				int k2 = (x2 - x1);
-				if (k2 != 0){
-					s1.insert(k1 / k2);
-					if (s1.size() > 1)
-						return false ;
-				}
-			}
-		}
+		if(dx*(y2 - y) != dy*(x2 - x))
+			return false ;
 
 	}
 
 	return true;
+
     }
 };
