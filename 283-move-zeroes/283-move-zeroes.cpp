@@ -1,7 +1,7 @@
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
-        	int count1 = 0 ;
+        int count1 = 0 ;
 	int count_zero = 0 ;
 	int n = nums.size();
 
@@ -13,15 +13,15 @@ public:
 		}
 		else
 		{
-			nums[count1] = nums[i];
-			count1 ++;
+			nums[count1++] = nums[i];
+
 		}
 	}
 
-	for (int i = 0 ; i < count_zero ; i ++ )
+	for (int i = count1 ; i < (int) nums.size() ; i ++ )
 	{
-		nums[count1] = 0 ;
-		count1++;
+		nums[i] = 0 ;
 	}
+
     }
 };
