@@ -1,29 +1,20 @@
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        int n = s.size();
-	int m = t.size();
-	map<char , int> mp , mp2 ;
-	char c ;
-	for (int i = 0 ; i < n ; i ++ )
+        int sum1 = 0 , sum2 = 0 ;
+	for (int i = 0 ; i < (int) s.size() ; i ++ )
 	{
-		mp[s[i]] ++;
+		sum1+= int(s[i]) ;
 	}
 
-	for (int i = 0 ; i < m ; i ++ )
+	for (int i = 0 ; i < (int) t.size() ; i ++ )
 	{
-		mp2[t[i]] ++;
-
+			sum2+= int(t[i]) ;
 	}
 
-	for (auto i : t)
-	{
-		if (mp[i] == 0 || mp2[i] > mp[i])
-		{
-			c = i ;
-		}
-	}
 
-	return c;
+	int diff = sum2 - sum1 ;
+
+	return char(diff);
     }
 };
