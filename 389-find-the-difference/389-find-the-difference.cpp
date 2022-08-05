@@ -1,7 +1,7 @@
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        	int n = s.size();
+        int n = s.size();
 	int m = t.size();
 	map<char , int> mp , mp2 ;
 	char c ;
@@ -18,7 +18,7 @@ public:
 
 	for (auto i : t)
 	{
-		if (mp2[i] == 0 || mp2[i] > mp[i])
+		if (mp[i] == 0 || mp2[i] > mp[i])
 		{
 			c = i ;
 		}
