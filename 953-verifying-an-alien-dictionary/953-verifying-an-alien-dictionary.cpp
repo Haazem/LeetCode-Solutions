@@ -1,45 +1,48 @@
 class Solution {
 public:
     bool isAlienSorted(vector<string>& words, string order) {
-      map<char , int> mp;
-for (int i = 0 ; i < (int) order.size() ; i ++ )
-{
-	mp[order[i]] = i ;
-}
+        	int n = words.size();
+	if(n == 1)
+		return true;
 
-int n = words.size();
-bool ok = true;
-for (int i = 0 ; i < n-1 ; i ++)
-{
-	string s1 = words[i];
-	string s2 = words[i + 1];
-	string s3 = "";
-	string s4 = "";
-	int mn = min(s1.size() , s2.size());
-	for (int j = 0 ; j < mn ; j ++)
+	int arr[26] ;
+	for (int i = 0 ; i < 26 ; i ++)
 	{
-		s3 += s1[j];
-		s4 += s2[j];
-		if (mp[s1[j]] < mp[s2[j]])
+		//store letters in arr
+		arr[order[i] - 97] = i ;
+	}
+
+	for (int i = 0 ; i < n - 1; i ++ )
+	{
+		int len1 = words[i].size();
+		int len2 = words[i+1].size();
+
+		int mn = 0 ;
+		while(mn < len1 && mn < len2)
 		{
-			break;
+			//find value of char
+			int x = arr[words[i][mn] - 97];
+			int y = arr[words[i+1][mn] - 97];
+
+			if(x < y)
+			{
+				len1 = len2 ;
+				break;
+			}
+			else if (x > y)
+			{
+				return false ;
+			}
+			mn ++;
+
 		}
-		else if (mp[s1[j]] > mp[s2[j]])
+		if(len1 > len2)
 		{
 			return false ;
 		}
-
 	}
-	if(ok && s3 == s4)
-	{
-		if(s1.size() > s2.size())
-			return false ;
-	}
-
-}
 
 
 return true;
-  
     }
 };
