@@ -1,24 +1,28 @@
 class NumArray {
 public:
-vector<int> v ;
+  vector<int> v ;
 
     NumArray(vector<int>& nums) {
         v = nums;
+		for (int i = 1 ; i < (int) v.size() ; i ++ )
+		 {
+				v[i] += v[i - 1];
+		 }
+
     }
-    
+
     int sumRange(int left, int right) {
-    	
-    	if(left <= right && right < (int) v.size())
-    	{	
-    		int sum= 0 ; 
-    		for (int i = left ; i <= right ; i ++ )
-    		{
-    			sum += v[i];
-    		}
+    
+		int sum = v[right];
+		
+		if(left > 0 )
+		{
+			sum -= v[left - 1];
+		}
+
     		return sum;
-    	}
-    	return 0 ;
     	
+
     }
 };
 
