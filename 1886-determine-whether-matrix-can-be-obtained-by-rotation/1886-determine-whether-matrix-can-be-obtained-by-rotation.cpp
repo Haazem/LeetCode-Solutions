@@ -1,40 +1,26 @@
 class Solution {
 public:
- void rotate(vector<vector<int>> & mat)
-{
-	int n = mat.size();
-	for (int i = 0 ; i < n ; i ++ )
-	{
-		for (int j = 0 ; j < i ; j ++ )
-		{
-			swap(mat[i][j] , mat[j][i]);
-		}
-	}
-
-	for(int i = 0 ; i < n ; i ++ )
-	{
-		reverse(mat[i].begin() , mat[i].end());
-	}
-}
     bool findRotation(vector<vector<int>>& mat, vector<vector<int>>& target) {
-        int count = 0 ;
-	for(int k = 0 ; k < 4 ; k ++ )
-	{
-		rotate(mat);
-		count = 0 ;
-		for(int i = 0 ; i < (int) mat.size() ; i ++ )
+        int n = mat.size();
+	for(int k = 0 ; k < 4 ; k ++ ){
+		for(int i = 0 ; i < n ; i ++ )
 		{
-			for(int j = 0 ; j < (int) mat[i].size() ; j ++ )
+			for (int j = 0 ; j < i ; j ++ )
 			{
-				if(mat[i][j] == target[i][j])
-					count ++;
+				swap(mat[i][j],mat[j][i]);
 			}
 		}
-		
-		if(count == (int) mat.size() * (int) mat.size())
-				return true;
+
+		for(int i = 0 ; i < n ; i ++)
+		{
+			reverse(mat[i].begin(),mat[i].end());
+		}
+		if(mat ==  target)
+			return true;
+
 	}
 
-	return false;
+
+	return false ;
     }
 };
