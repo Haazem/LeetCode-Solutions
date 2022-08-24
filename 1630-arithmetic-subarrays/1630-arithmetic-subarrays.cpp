@@ -1,27 +1,30 @@
 class Solution {
 public:
-    
-bool check(vector<int> nums , int& l , int& r){
-
-	sort(nums.begin()+l , nums.begin()+r+1); // sort sub-array
-	int diff = nums[l+1]-nums[l];
-	for(int i = l+1 ; i<= r; i++)
-	{
-		if(nums[i] - nums[i-1] != diff)
-			return false ;
-	}
-	return true;
-}
     vector<bool> checkArithmeticSubarrays(vector<int>& nums, vector<int>& l, vector<int>& r) {
-        vector<bool> ans;
-	for(int i = 0 ; i <(int) l.size() ; i ++ ){
-		if(check(nums , l[i] , r[i])){
-			ans.push_back(true);
+        	vector<int> temp = nums;
+	vector<bool> res;
+	int m = l.size();
+	for(int i = 0 ; i < m ; i ++ )
+	{
+		int a = l[i] , b = r[i];
+		sort(nums.begin()+a , nums.begin()+b+1);
+		int diff = nums[a+1]-nums[a];
+		bool ok = true;
+		for(int j = a+1 ; j <= b ; j ++ )
+		{
+			if( nums[j] - nums[j-1] != diff)
+			{
+				ok = false ;
+				break;
+			}
+
 		}
-		else {
-			ans.push_back(false);
-		}
+		if(ok)
+			res.push_back(true);
+		else
+			res.push_back(false);
+		nums = temp;
 	}
-	return ans;
+	return res;
     }
 };
