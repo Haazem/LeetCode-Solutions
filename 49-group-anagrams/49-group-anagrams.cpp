@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        //sort(strs.begin() , strs.end());
+    sort(strs.begin() , strs.end());
 	int n = strs.size();
 	vector<vector<string>> res ;
 	map<string , vector<string>> mp ;
