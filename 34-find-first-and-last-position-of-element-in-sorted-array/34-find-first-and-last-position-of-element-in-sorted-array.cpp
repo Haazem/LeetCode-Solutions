@@ -1,36 +1,46 @@
 class Solution {
 public:
-    vector<int> searchRange(vector<int>& nums, int target) {
-       
-	int l = 0  , r = nums.size()-1 ;
-	int mid;
-	vector<int> ans;
-	bool find = false;
-	while(l <= r)
+    
+    
+int doSearch(vector<int>&nums , int target , bool left){
+
+	int l = 0  , r = nums.size()-1;
+	int pos = -1 ;
+	int mid ;
+	while(l <= r )
 	{
-		mid = l + (r - l) / 2 ;
-		if(nums[mid] == target) find = true;
-		if(nums[mid] >= target)
+		mid = (l+r) / 2;
+		if(nums[mid] > target)
 			r = mid - 1;
-		else l = mid + 1 ;
+		else if (nums[mid] < target)
+			l = mid + 1 ;
+		else
+		{
+			pos = mid ;
+			if (left)
+			{
+				r = mid - 1;
+			}
+			else
+			{
+				l = mid + 1;
+			}
+		}
 	}
 
-	if(!find)ans.push_back(-1);
-	else ans.push_back(l);
+	return pos;
+}
 
-	find = false;
-    l = 0 , r = nums.size()-1;
-	while(l <= r)
-	{
-		mid = l + (r - l) / 2 ;
-		if(nums[mid] == target) find = true;
-		if(nums[mid] <= target)
-			l = mid + 1;
-		else r = mid - 1 ;
-	}
-	if(!find) ans.push_back(-1);
-	else ans.push_back(r);
+    
+    vector<int> searchRange(vector<int>& nums, int target) {
+        	vector<int> ans;
 
-	return ans; 
+	int left = doSearch(nums, target, true);
+	int right = doSearch(nums, target, false);
+
+	ans.push_back(left);
+	ans.push_back(right);
+	return ans;
+
     }
 };
