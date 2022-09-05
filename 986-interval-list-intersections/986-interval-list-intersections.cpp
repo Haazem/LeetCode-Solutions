@@ -1,7 +1,8 @@
 class Solution {
 public:
     vector<vector<int>> intervalIntersection(vector<vector<int>>& firstList, vector<vector<int>>& secondList) {
-        	sort(firstList.begin() , firstList.end());
+        
+	sort(firstList.begin() , firstList.end());
 	sort(secondList.begin() , secondList.end());
 	int n = firstList.size();
 	int m = secondList.size();
@@ -25,16 +26,7 @@ public:
 				p2++;
 			}
 	}
-
-	while(p1 > n ){
-		ans.push_back({firstList[p1][0] , firstList[p1][1]});
-		p1++;
-	}
-	while(p2 > m ){
-		ans.push_back({secondList[p2][0] , secondList[p2][1]});
-		p2++;
-	}
-
+	
 	return ans;
     }
 };
