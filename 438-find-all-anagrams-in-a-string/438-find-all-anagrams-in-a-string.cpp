@@ -1,36 +1,35 @@
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
-        	int n = s.size();
-	int m = p.size();
-	vector<int> ans;
-	if (m > n) return ans;
+        
+	int n = (int)s.size();
+	int m = (int)p.size();
+	vector<int> v ;
 
-	map<char , int> mp1;
-	map<char , int> mp2;
+	if (m > n) return v ;
 
-	for(int i = 0 ; i < m ; i ++ )
-	{
-		mp1[p[i]] +=1;
-		mp2[s[i]] +=1;
+	map<char , int> mp1 ;
+	map<char , int> mp2 ;
+
+	for (int i = 0 ; i < m ; i ++ ){
+		mp1[p[i]] ++;
+		mp2[s[i]] ++;
 	}
 
-	int l = 0 ;
-	if(mp1 == mp2)ans.push_back(0);
-	for(int i = m ; i < n ; i ++)
-	{
-		mp2[s[i]] +=1;  // add new item
-		mp2[s[l]] -=1;  //
-		if(mp2[s[l]] == 0 )
-		{
-			mp2.erase(s[l]);
-		}
-		l++;
-		if(mp1 == mp2)ans.push_back(l);
+	if (mp1 == mp2 ) v.push_back(0);
 
+	int cnt = 0;
+	for (int i = m ; i < n ; i ++ ){
+
+		mp2[s[i]] ++;
+		mp2[s[cnt]]--;
+		if(mp2[s[cnt]] == 0) mp2.erase(s[cnt]);
+
+		if(mp1 == mp2) v.push_back(i-m+1);
+
+		cnt ++;
 	}
 
-
-	return ans;
+	return v ;
     }
 };
