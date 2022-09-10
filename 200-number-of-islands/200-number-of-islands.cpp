@@ -1,65 +1,50 @@
 class Solution {
 public:
-    // Direction vectors
+    
+// Direction vectors
 int dx[4] = {0 , 0 , 1 , -1};
 int dy[4] = {1 , -1 , 0 , 0};
 
-int n , m ;
-
-bool valid(int i , int j ){
-	if(i < 0 || i >= m || j < 0 || j >= n)
+bool valid(int i , int j , int n , int m ){
+	if(i < 0 || i >= n || j < 0 || j >= m)
 		return false;
 	return true;
 }
 
-void BFS_v1(int i ,  int j ,  vector<vector<char>>& grid , vector<vector<int>>& vis) {
+void dfs(int r, int c, int n, int m, vector<vector<char>>& grid){
 
-	vis[i][j] = 1 ;
-	queue<pair<int , int>> q;
-	q.push({i , j});
-	while(!q.empty()){
-		pair<int , int> p = q.front();
-		int x = p.first ;
-		int y = p.second;
-		q.pop();
+    	if(!valid(r, c, n, m) || grid[r][c] == '0') return ;
+    	
+		grid[r][c] = '0';
 
-		for (int i = 0 ; i < 4 ; i ++){
-			int x2 = dx[i] + x;
-			int y2 = dy[i] + y;
+		for(int i = 0 ; i < 4 ; i ++){
+        	int x2 = r + dx[i];
+        	int y2 = c + dy[i];
 
-			if (!valid(x2, y2))
-				continue;
-			if(vis[x2][y2] != 0 || grid[x2][y2] != '1')
-				continue;
+        	dfs(x2 , y2 , n , m , grid);
 
-			q.push({x2 , y2});
-			vis[x2][y2] = 1;
-
-		}
-
-	}
-
+        }
 }
 
-    
+
     
     int numIslands(vector<vector<char>>& grid) {
-        	int cnt = 0 ;
-	m = grid.size();
-	n = grid[0].size();
+         
+	int ans = 0 ;
+	int n = (int) grid.size();  	// row
+	int m = (int) grid[0].size();   // col
 
-	vector<vector<int>> vis(m , vector<int>(n , 0));
-
-	for (int i = 0 ; i < m ; i ++){
-		for (int j = 0 ; j < n ; j ++){
-			if (grid[i][j] == '1' && vis[i][j] == 0){
-				BFS_v1(i, j, grid, vis);
-				cnt ++;
+	for(int i = 0 ; i < n ; i ++ ){
+		for(int j = 0 ; j < m ; j ++ ){
+			if(grid[i][j] == '1'){
+				ans ++;
+				dfs(i, j, n, m, grid);
 			}
 		}
 	}
 
-
-return cnt;
+	return ans;
+        
+        
     }
 };
