@@ -1,0 +1,14 @@
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+            n = len(nums)
+            toatal_size = pow(2 , n)
+            ans = []
+            for i in range(toatal_size):
+                temp = []
+                for j in range(n):
+                    if i & (1 << j) :
+                        temp.append(nums[j])
+                ans.append(temp)
+            return ans
+
+        
