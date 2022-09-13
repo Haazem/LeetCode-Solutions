@@ -1,23 +1,27 @@
 class Solution {
 public:
-    vector<vector<int>> subsets(vector<int>& nums) {
-        	
-	vector<vector<int>> res ; 
-	
-	int n = nums.size();
-	unsigned int total_size = pow(2 , n);
-	
-	for (int i = 0 ; i < total_size ; i ++){
-		vector<int> temp;
-			
-		for (int j = 0 ; j < n ; j ++){
-			if(i & (1 << j)){
-				temp.push_back(nums[j]);
-			}
-		}
-		res.push_back(temp);
+    
+    vector<vector<int>> ans ;
+
+void dfs(vector<int>& nums ,vector<int> subset , int index){
+
+	if(index == (int) nums.size()){
+		ans.push_back(subset);
+		return;
 	}
-	
-	return res;
+
+	subset.push_back(nums[index]);
+	dfs(nums , subset , index + 1);
+	subset.pop_back();
+	dfs(nums,subset , index+1);
+
+}
+
+    
+    vector<vector<int>> subsets(vector<int>& nums) {
+        	vector<int> subset;
+	dfs(nums , subset , 0);
+
+	return ans;
     }
 };
