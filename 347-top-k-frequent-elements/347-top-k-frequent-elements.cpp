@@ -1,32 +1,27 @@
 class Solution {
 public:
-    
- static   bool my_sort(pair<int , int>& p1, pair<int , int>& p2 ){
-
-	return p1.second >= p2.second;
-
-      }
-
-
     vector<int> topKFrequent(vector<int>& nums, int k) {
         
-	vector<int> ans ;
-	map<int , int>m;
+	 	 	 int n = nums.size();
+	        unordered_map<int, int> m;
+	        for (int i = 0; i < n; i++) {
+	            m[nums[i]]++;
+	        }
 
-	for(int i = 0 ; i < (int)nums.size() ; i++){
-		m[nums[i]] ++;
-	}
+	        vector<vector<int>> buckets(n + 1);
+	        for (auto it = m.begin(); it != m.end(); it++) {
+	            buckets[it->second].push_back(it->first);
+	        }
 
-	vector<pair<int , int>> l ;
-	for (auto i : m){
-		l.push_back({i.first , i.second});
-	}
+	        vector<int> result;
 
-	sort(l.begin(),l.end() , my_sort);
-	for(int i = 0 ; i < k ; i ++){
-		ans.push_back(l[i].first);
-	}
-
-	return ans;
+	        for(int i = n ; i >=0 ; i--){
+	        	if((int) result.size() == k)
+	        		break;
+	        	for(auto j : buckets[i]){
+	        		result.push_back(j);
+	        	}
+	        }
+	        return result;
     }
 };
