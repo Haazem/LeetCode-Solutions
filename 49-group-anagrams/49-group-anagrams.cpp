@@ -4,7 +4,7 @@ public:
         
         
 	vector<vector<string>> ans ;
-	map<string , vector<string>> mp;
+	unordered_map<string , vector<string>> mp;
 	
 	for(int i = 0 ; i < (int)strs.size();i++){
 		string temp = strs[i]; 
