@@ -1,7 +1,13 @@
 class Solution:
-    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-            ans = defaultdict(list)
-            for s in strs :
-                temp = list(sorted(s))
-                ans[tuple(temp)].append(s)
-            return  ans.values()
+    from collections import defaultdict
+
+    def groupAnagrams(self, l: List[str]) -> List[List[str]]:
+            count = defaultdict(list)
+            ans = []
+            for i in l:
+                s = list(sorted(i))
+                count[tuple(s)].append(i)
+
+            for i in count :
+                ans.append(count[i])
+            return ans
