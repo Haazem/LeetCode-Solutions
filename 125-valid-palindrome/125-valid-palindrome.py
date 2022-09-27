@@ -1,30 +1,28 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-            i = 0
-            j = len(s) - 1
-            while i < j:
-                while True and i < len(s):
-                    if ((48 <= ord(s[i]) <= 57) or
-                            (65 <= ord(s[i]) <= 90) or
-                            (97 <= ord(s[i]) <= 122)):
-                        break
-                    else:
-                        i += 1
-                while True and i < j:
-                    if ((48 <= ord(s[j]) <= 57) or
-                            (65 <= ord(s[j]) <= 90) or
-                            (97 <= ord(s[j]) <= 122)):
-                        break
-                    else:
-                        j -= 1
+        l = 0
+        r = len(s)-1
+        while l < r :
 
-                if i < len(s) and i <= j and j >= 0:
-                    if s[i].lower() != s[j].lower():
-                        return False
-                    else:
-                        i += 1
-                        j -= 1
-                else:
-                    return True
+            while l < r and not self.IsAlNum(s[l]):
+                l += 1
 
+            while r > l and not self.IsAlNum(s[r]):
+                r -= 1
+
+            if s[l].lower() != s[r].lower():
+                return False
+            else:
+                l, r = l + 1, r - 1
+
+        return True
+
+    def IsAlNum(self , c):
+
+        if (ord('A') <= ord(c) <=ord('Z')  or
+           ord('a') <=  ord(c) <= ord('z') or
+           ord('0') <= ord(c) <= ord('9')):
             return True
+        else:
+            return False
+
