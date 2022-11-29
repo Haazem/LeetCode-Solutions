@@ -1,23 +1,16 @@
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
-        
-        	int cnt = 0;
-
+    
+        	int k = 0;
 	for(int i = 0 ; i < (int)nums.size() ; i ++ ){
-		if(nums[i] == val){
-			nums[i] = 150;
-		}else
-			cnt++;
+		if (nums[i] != val){
+			nums[k++] = nums[i];
+		}
 	}
 
-	sort(nums.begin() , nums.end());
-
-	for(auto k : nums){
-		cout <<k<<endl;
-	}
-
-	return cnt;
+	return k;
+        
         
     }
 };
