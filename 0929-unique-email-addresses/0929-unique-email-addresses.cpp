@@ -2,62 +2,38 @@ class Solution {
 public:
     int numUniqueEmails(vector<string>& emails) {
         
-        	int cnt = 0;
-	int n = (int)emails.size();
-	set<string> st;
+        	int ans = 0;
+	set<string> s;
 
-	for(int i = 0 ; i < n ; i ++){
-		string temp = "";
+	for(auto e : emails){
+		string local = "";
+		string domain = "";
+
 		int j = 0;
-		bool flag = false;
-		while(j < (int)emails[i].size()){
-
-			if(!flag && emails[i][j] != '.' && emails[i][j] != '+' && emails[i][j] != '@')
-			{
-				temp += emails[i][j];
-				j++;
-			}
-			else if (!flag){
-				if(emails[i][j] == '@')
-				{
-					break;
-				}
-				else if (emails[i][j] == '.'){
-					j++;
-				}
-				else {
-					flag = true;
-					j++;
-				}
-			}
-			else{
-				if(emails[i][j] == '@')
-				{
-					break;
-				}
-				else{
-					j++;
-				}
-			}
-
+		while(e[j] != '@' && e[j] != '+'){
+			if(e[j] != '.')
+				local += e[j];
+			j++;
 		}
 
-		//cout << "j = " << j << endl;
-
-		while(j < (int)emails[i].size()){
-			temp += emails[i][j];
+		while(e[j] != '@'){
 			j ++;
 		}
 
-		//cout << temp << endl;
+		while(j < (int) e.size()){
+			domain += e[j];
+			j++;
+		}
 
-		st.insert(temp);
+		string res = local + domain;
+		s.insert(res);
+
 	}
 
 
-	cnt = (int)st.size();
-	return cnt;
-
+	ans = (int)s.size();
+	return ans;
+        
         
         
     }
