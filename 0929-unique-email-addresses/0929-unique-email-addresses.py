@@ -3,9 +3,22 @@ class Solution:
             unique = set()
 
             for e in emails:
-                local, domain = e.split('@')
-                local = local.split('+')[0]
-                local = local.replace('.', '')
-                unique.add((local, domain))
+                j, local = 0, ""
+
+                while e[j] not in ['+', '@']:
+                    if e[j] != '.':
+                        local += e[j]
+                    j += 1
+
+                while e[j] != '@':
+                    j += 1
+
+                domain = ""
+                while j < len(e):
+                    domain += e[j]
+                    j += 1
+
+                unique.add(local + domain)
 
             return len(unique)
+
