@@ -2,32 +2,30 @@ class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         
-        
+        	vector<int> ans;
 	int n = (int)nums1.size();
+	int m = (int)nums2.size();
+
 	map<int , int>mp;
-	for(int i = 0 ; i < n ; i ++ ){
-		mp[nums1[i]] = i; // val , idx
+
+	for(int i = 0 ; i < m ; i ++ ){
+		mp[nums2[i]] = -1;
+
+		for(int j = i+1 ; j < m ; j ++){
+			if(nums2[j] > nums2[i]){
+				mp[nums2[i]] = nums2[j];
+				break;
+			}
+		}
 	}
 
-	vector<int>ans(n , -1);
-	stack<int> s;
 
-	for(int i = 0 ; i < (int)nums2.size(); i ++){
-		int cur_val = nums2[i];
-
-		while(!s.empty() && cur_val > s.top()){
-			int top_val = s.top();
-			s.pop();
-			int idx = mp[top_val];
-			ans[idx] = cur_val;
-		}
-
-		if(mp.find(cur_val) != mp.end()){
-			s.push(cur_val);
-		}
+	for(int i = 0 ; i < n ; i ++ ){
+		ans.push_back(mp[nums1[i]]);
 	}
 
 	return ans;
+        
         
         
     }
