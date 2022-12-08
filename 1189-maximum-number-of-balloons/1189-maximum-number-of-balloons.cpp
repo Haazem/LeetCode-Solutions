@@ -2,16 +2,25 @@ class Solution {
 public:
     int maxNumberOfBalloons(string text) {
         
-    int n = (int)text.size();
-	map<char , int> mp;
-	int res = 0;
+        
+	map<char , int > text_count;
+	map<char , int> balloon_count;
 
-	for(int i = 0 ; i < n ; i ++ ){
-		mp[text[i]] ++;
-		while(mp['b'] >= 1 && mp['a'] >= 1 && mp['l'] >= 2 && mp['o'] >= 2 && mp['n'] >= 1){
-			res ++;
-			mp['b'] -=1; mp['a']-=1; mp['l'] -=2 ; mp['o'] -=2; mp['n'] -= 1;
-		}
+	string temp = "balloon";
+
+	for(int i = 0 ; i < (int)text.length() ; i ++ ){
+		text_count[text[i]] ++;
+	}
+
+	for(int i = 0 ; i < (int)temp.length() ; i ++){
+		balloon_count[temp[i]] ++;
+	}
+
+	int res = (int) text.length();
+
+	for(auto i: balloon_count){
+		res = min(res , text_count[i.first] / balloon_count[i.first]);
+
 	}
 
 	return res;
