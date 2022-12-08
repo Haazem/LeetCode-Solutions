@@ -1,21 +1,25 @@
 class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
             words = s.split(" ")
+
             if len(words) != len(pattern):
                 return False
 
-            charToword = {}
-            wordTochar = {}
+            d1 = {}
+            d2 = {}
+            k1, k2 = 'a', 'a'
 
-            for c, w in zip(pattern, words):
 
-                if c in charToword and charToword[c] != w:
+            for i in range(len(words)):
+                if words[i] not in d1:
+                    d1[words[i]] = k1
+                    k1 = chr(ord(k1) + 1)
+                if pattern[i] not in d2:
+                    d2[pattern[i]] = k2
+                    k2 = chr(ord(k2) + 1)
+
+            for i in range(len(words)):
+                if d1[words[i]] != d2[pattern[i]]:
                     return False
-
-                if w in wordTochar and wordTochar[w] != c:
-                    return False
-
-                charToword[c] = w  # [a] = dog
-                wordTochar[w] = c  # [dog] = a
 
             return True
