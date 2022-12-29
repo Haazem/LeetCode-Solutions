@@ -1,22 +1,21 @@
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        
-        map<int, int> mp;
-	int n = (int)nums.size();
-	int l = 0;
+       
+    int n = (int)nums.size();
+	int l = 1;
 
-	for(int i = 0 ; i < n ; i ++ ){
-		mp[nums[i]] += 1;
-		if(mp[nums[i]] > 1)
+	int prev = nums[0];
+
+	for (int i = 1 ; i < n ; i ++ ){
+		if (nums[i] == prev)
 			continue;
-		else
-		{
-			nums[l] = nums[i];
-			l ++;
+		else {
+			prev = nums[i];
+			nums[l++] = nums[i];
 		}
 	}
-
+ 
         return l;
         
     }
